@@ -19,7 +19,11 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(Duration.zero);
     final session = supabase.auth.currentSession;
 
-    if (!mounted) if (session != null) {
+    if (!mounted) {
+      return;
+    }
+
+    if (session != null) {
       Navigator.of(context).pushReplacementNamed("/account");
     } else {
       Navigator.of(context).pushReplacementNamed("/login");
@@ -28,10 +32,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }
